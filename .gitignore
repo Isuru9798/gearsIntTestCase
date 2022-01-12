@@ -14,6 +14,5 @@ yarn-error.log
 /.vscode
 
 database/migrations/2022_01_12_230957_create_books_table.php
-app/Http/controllers/admin
 app/Http/controllers/author
 app/Models/Book.php
