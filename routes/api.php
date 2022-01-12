@@ -25,5 +25,15 @@ Route::prefix('authentication')->group(function () {
 
 Route::middleware('auth:api')->group(function () {
 
+    // admin routes
+    Route::prefix('admin')->group(function () {
+        Route::prefix('authors')->group(function () {
+            Route::get('authors', [AuthorController::class, 'getAuthors']);
+            Route::get('author-by-id', [AuthorController::class, 'getAuthorById']);
+            Route::post('action', [AuthorController::class, 'action']);
+        });
+       
+    });
+
     
 });
