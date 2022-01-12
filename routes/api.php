@@ -32,8 +32,13 @@ Route::middleware('auth:api')->group(function () {
             Route::get('author-by-id', [AuthorController::class, 'getAuthorById']);
             Route::post('action', [AuthorController::class, 'action']);
         });
-       
+        Route::prefix('books')->group(function () {
+            Route::get('books', [BookController::class, 'getBooks']);
+            Route::get('get-books-by-author', [BookController::class, 'getBooksByAuthor']);
+            Route::get('get-books-by-id',  [BookController::class, 'getBooksById']);
+            Route::post('action',  [BookController::class, 'action']);
+        });
     });
 
-    
+   
 });
