@@ -55,6 +55,9 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('upload')->group(function () {
         Route::post('cover-image', [ImageUploadController::class, 'store']);
     });
+
+    // get user permission
+    Route::get('authentication/get-permission', [LoginController::class, 'getUserPermission']);
 });
 
 Route::get('get-books', [FrontController::class, 'getBooks']);

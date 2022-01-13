@@ -12,7 +12,14 @@ class AuthorController extends Controller
 {
     function getAuthors()
     {
-        $authors = User::where('role', env('AUTHOR'))->get();
+        $authors = User::select(
+            "id",
+            "f_name as first_name",
+            "l_name as last_name",
+            "role",
+            "status",
+            "email"
+        )->where('role', env('AUTHOR'))->get();
         return response()->json($authors, 200);
     }
     function getAuthorById()
@@ -22,7 +29,14 @@ class AuthorController extends Controller
             return response('author id must be required', 403);
         }
 
-        $author = User::where('id', $authorId)
+        $author = User::select(
+            "id",
+            "f_name as first_name",
+            "l_name as last_name",
+            "role",
+            "status",
+            "email"
+        )->where('id', $authorId)
             ->where('role', env('AUTHOR'))
             ->first();
         return response()->json($author, 200);
