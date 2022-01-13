@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         // if validation failed send response to front
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 400);
         }
 
         // login attempt
@@ -30,6 +30,7 @@ class LoginController extends Controller
         ) {
             // if login credentials faild, send response
             return response([
+                'success' => false,
                 'message' => 'invalid login credentials.'
             ]);
         }
@@ -37,6 +38,7 @@ class LoginController extends Controller
         // check author status 
         if (Auth::user()->status == env('INACTIVE')) {
             return response([
+                'success' => false,
                 'message' => 'your account has been disabled.'
             ]);
         }
@@ -46,6 +48,7 @@ class LoginController extends Controller
 
         // sending respons
         return response([
+            'success' => true,
             'user_id' => Auth::user()->id, // get logged user id
             'access_token' => "Bearer " . $assessToken
         ]);
@@ -65,6 +68,7 @@ class LoginController extends Controller
             !Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => env('ADMIN')])
         ) {
             return response([
+                'success' => false,
                 'message' => 'invalid login credentials. '
             ]);
         }
@@ -72,6 +76,7 @@ class LoginController extends Controller
             ->accessToken;
 
         return response([
+            'success' => true,
             'user_id' => Auth::user()->id,
             'access_token' => "Bearer " . $assessToken
         ]);

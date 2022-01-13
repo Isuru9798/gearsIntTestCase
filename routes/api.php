@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\author\AuthorController;
 use App\Http\Controllers\admin\book\BookController;
 use App\Http\Controllers\authentication\LoginController;
+use App\Http\Controllers\authentication\RegisterController;
 use App\Http\Controllers\author\AuthorBookController;
 use App\Http\Controllers\front\FrontController;
 use App\Http\Controllers\upload\ImageUploadController;
