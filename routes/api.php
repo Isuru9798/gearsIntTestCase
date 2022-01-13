@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\author\AuthorController;
 use App\Http\Controllers\admin\book\BookController;
 use App\Http\Controllers\authentication\LoginController;
 use App\Http\Controllers\author\AuthorBookController;
+use App\Http\Controllers\front\FrontController;
 use App\Http\Controllers\upload\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,13 +43,17 @@ Route::middleware('auth:api')->group(function () {
         });
     });
 
+    // author routes
     Route::prefix('author')->group(function () {
         Route::get('get-books', [AuthorBookController::class, 'getBooks']);
         Route::post('add-book', [AuthorBookController::class, 'addBook']);
         Route::get('get-books-by-id', [AuthorBookController::class, 'getBooksById']);
     });
 
+    // image upload route
     Route::prefix('upload')->group(function () {
         Route::post('cover-image', [ImageUploadController::class, 'store']);
     });
 });
+
+Route::get('get-books', [FrontController::class, 'getBooks']);
