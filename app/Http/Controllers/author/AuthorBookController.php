@@ -12,13 +12,23 @@ class AuthorBookController extends Controller
 {
     function getBooks()
     {
-        $books = Book::where('users_id', Auth::user()->id)->get();
+        $books = Book::select(
+            "id",
+            "name as book_name",
+            "image as image_url",
+            "status"
+        )->where('users_id', Auth::user()->id)->get();
         return response()->json($books, 200);
     }
     function getBooksById()
     {
         $bookId = request('book_id');
-        $book = Book::where('users_id', Auth::user()->id)
+        $book = Book::select(
+            "id",
+            "name as book_name",
+            "image as image_url",
+            "status"
+        )->where('users_id', Auth::user()->id)
             ->where('id', $bookId)
             ->first();
         return response()->json($book, 200);
