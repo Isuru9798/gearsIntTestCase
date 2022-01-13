@@ -11,7 +11,12 @@ class BookController extends Controller
 {
     function getBooks()
     {
-        $books = Book::all();
+        $books = Book::select(
+            "id",
+            "name as book_name",
+            "image as image_url",
+            "status"
+        )->get();
         return response()->json($books, 200);
     }
     function getBooksByAuthor()
@@ -21,7 +26,12 @@ class BookController extends Controller
             return response('author id must be required', 403);
         }
 
-        $books = Book::where('users_id', $authorId)->get();
+        $books = Book::select(
+            "id",
+            "name as book_name",
+            "image as image_url",
+            "status"
+        )->where('users_id', $authorId)->get();
         return response()->json($books, 200);
     }
     function getBooksById()
@@ -31,7 +41,12 @@ class BookController extends Controller
             return response('author id must be required', 403);
         }
 
-        $books = Book::find($id);
+        $books = Book::select(
+            "id",
+            "name as book_name",
+            "image as image_url",
+            "status"
+        )->find($id);
         return response()->json($books, 200);
     }
     function action(Request $request)

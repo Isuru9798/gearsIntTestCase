@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\authentication;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -80,5 +81,13 @@ class LoginController extends Controller
             'user_id' => Auth::user()->id,
             'access_token' => "Bearer " . $assessToken
         ]);
+    }
+
+    public function getUserPermission()
+    {
+        $user_role = Auth::user()->role;
+        return response()->json([
+            "role" => $user_role
+        ], 200);
     }
 }

@@ -16,7 +16,7 @@ class FrontController extends Controller
                 'books.id as book_id',
                 'books.name as book_name',
                 'books.status as book_status',
-                'books.image as book_image',
+                'books.image as image_url',
                 'users.id as author_id',
                 'users.f_name as author_f_name',
                 'users.l_name as author_l_name',
