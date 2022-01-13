@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\author\AuthorController;
 use App\Http\Controllers\admin\book\BookController;
 use App\Http\Controllers\authentication\LoginController;
+use App\Http\Controllers\author\AuthorBookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,5 +41,10 @@ Route::middleware('auth:api')->group(function () {
         });
     });
 
-   
+    Route::prefix('author')->group(function () {
+        Route::get('get-books', [AuthorBookController::class, 'getBooks']);
+        Route::post('add-book', function ($id) {
+        });
+        Route::get('get-books-by-id', [AuthorBookController::class, 'getBooksById']);
+    });
 });
