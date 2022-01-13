@@ -44,8 +44,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::prefix('author')->group(function () {
         Route::get('get-books', [AuthorBookController::class, 'getBooks']);
-        Route::post('add-book', function ($id) {
-        });
+        Route::post('add-book', [AuthorBookController::class, 'addBook']);
         Route::get('get-books-by-id', [AuthorBookController::class, 'getBooksById']);
     });
 
