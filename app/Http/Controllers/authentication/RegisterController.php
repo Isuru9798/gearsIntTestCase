@@ -5,6 +5,7 @@ namespace App\Http\Controllers\authentication;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -23,7 +24,7 @@ class RegisterController extends Controller
 
         // if validation failed send response to front
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json($validator->errors(), 202);
         }
 
         try {
@@ -33,13 +34,15 @@ class RegisterController extends Controller
                 'role' => env('AUTHOR'),
                 'status' => env('ACTIVE'),
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
             ]);
             return response()->json([
+                'success' => true,
                 'message' => 'you are registered as a author!'
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
+                'success' => false,
                 'message' => 'Unable to register please try again later!'
             ], 400);
         }
